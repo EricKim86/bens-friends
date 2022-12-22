@@ -1,29 +1,29 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Order_Items extends Model {}
+class Order_Items extends Model { }
 
 Order_Items.init(
 
     {
-       order_id: {
-        type: Datatypes.INT,
-        references: {
-            model: 'order',
-            key: 'id'
+        orders_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'orders',
+                key: 'id'
+            }
+        },
+        products_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'products',
+                key: 'id'
+            }
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
         }
-       } ,
-       product_id: {
-        type: Datatypes.INT,
-        references: {
-            model: 'products',
-            key: 'id'
-        }
-       },
-       quantity: {
-        type: Datatypes.INT,
-       }
-       
+
     },
 
     {
@@ -32,7 +32,7 @@ Order_Items.init(
         freezeTableName: true,
         underscored: true,
         modelName: 'order_items',
-      }
+    }
 )
 
 module.exports = Order_Items;

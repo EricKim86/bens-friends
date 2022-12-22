@@ -13,7 +13,7 @@ Categories.init(
             autoIncrement: true,
     },
         cat_name: {
-        type: varchar
+        type: DataTypes.STRING,
     },
 },
     {
@@ -21,7 +21,7 @@ Categories.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'project',
+        modelName: 'categories',
       }
 )
 
