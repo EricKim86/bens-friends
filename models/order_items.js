@@ -6,21 +6,32 @@ class Order_Items extends Model {}
 Order_Items.init(
 
     {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
+       order_id: {
+        type: Datatypes.INT,
+        references: {
+            model: 'order',
+            key: 'id'
+        }
+       } ,
+       product_id: {
+        type: Datatypes.INT,
+        references: {
+            model: 'products',
+            key: 'id'
+        }
+       },
+       quantity: {
+        type: Datatypes.INT,
+       }
+       
     },
-     
-    },
-},
+
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'project',
+        modelName: 'order_items',
       }
 )
 
