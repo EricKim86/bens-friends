@@ -29,7 +29,6 @@ const productdata = [
         status: true,
         categories_id: 4,
     },
-   
 ];
 
 const seedProducts = () => Products.bulkCreate(productdata);
