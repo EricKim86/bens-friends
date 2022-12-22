@@ -12,15 +12,28 @@ Collections.init(
             primaryKey: true,
             autoIncrement: true,
     },
-       
+        user_id: {
+            type: DataTypes.INTEGER,
+            reference: {
+                model: 'users',
+                key:'id',
+                }
     },
-},
+        items: {
+            type: DataTypes.INT,
+            reference: {
+                model: 'products',
+                key:'id',
+                 }
+         }
+    },
+
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'project',
+        modelName: 'collections',
       }
 )
 
