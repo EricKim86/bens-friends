@@ -16,7 +16,7 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    user_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -34,8 +34,12 @@ User.init(
       validate: {
         len: [8],
       },
+    sample_attribute1: {
+      type: DataTypes.BOOLEAN  
+    }  
     },
   },
+  
   {
     hooks: {
       beforeCreate: async (newUserData) => {
