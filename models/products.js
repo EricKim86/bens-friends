@@ -15,6 +15,9 @@ Products.init(
         prod_name: {
             type: DataTypes.VARCHAR
         },
+        prod_description: {
+            type: DataTypes.VARCHAR
+        },
         price: {
             type: DataTypes.INTEGER
          },
@@ -23,6 +26,10 @@ Products.init(
          },
         category_id: {
             type: Datatypes.INTEGER,
+            references: {
+                model: 'categories',
+                key: 'id'
+            }
          }
     },
        

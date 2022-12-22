@@ -12,15 +12,23 @@ Orders.init(
             primaryKey: true,
             autoIncrement: true,
     },
-      
+      user_id: {
+        references: {
+            model: 'users',
+            key: 'id',
+        }
+      },
+      status: {
+        type: DataTypes.VARCHAR,
+      }
     },
-},
+
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'project',
+        modelName: 'orders',
       }
 )
 
