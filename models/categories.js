@@ -6,10 +6,16 @@ class Categories extends Model {}
 Categories.init(
 
     {
-        id: int [primary key]
-        cat_name: varchar
-    }
-
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+    },
+        cat_name: {
+        type: varchar
+    },
+},
     {
         sequelize,
         timestamps: false,
