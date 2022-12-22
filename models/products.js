@@ -11,16 +11,27 @@ Products.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
+        },
+        prod_name: {
+            type: DataTypes.VARCHAR
+        },
+        price: {
+            type: DataTypes.INTEGER
+         },
+        status: {
+            type: DataTypes.BOOLEAN
+         },
+        category_id: {
+            type: Datatypes.INTEGER,
+         }
     },
- 
-    },
-},
+       
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'project',
+        modelName: 'product',
       }
 )
 
