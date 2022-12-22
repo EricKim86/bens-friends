@@ -34,12 +34,12 @@ User.init(
       validate: {
         len: [8],
       },
-    sample_attribute1: {
-      type: DataTypes.BOOLEAN  
-    }  
+      sample_attribute1: {
+        type: DataTypes.BOOLEAN
+      }
     },
   },
-  
+
   {
     hooks: {
       beforeCreate: async (newUserData) => {
@@ -58,3 +58,5 @@ User.init(
     modelName: 'user',
   }
 );
+
+module.exports = User;

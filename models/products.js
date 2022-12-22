@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Products extends Model {}
+class Products extends Model { }
 
 Products.init(
 
@@ -13,33 +13,33 @@ Products.init(
             autoIncrement: true,
         },
         prod_name: {
-            type: DataTypes.VARCHAR
+            type: DataTypes.STRING,
         },
         prod_description: {
-            type: DataTypes.VARCHAR
+            type: DataTypes.STRING,
         },
         price: {
-            type: DataTypes.INTEGER
-         },
+            type: DataTypes.INTEGER,
+        },
         status: {
-            type: DataTypes.BOOLEAN
-         },
-        category_id: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.BOOLEAN,
+        },
+        categories_id: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'categories',
                 key: 'id'
             }
-         }
+        }
     },
-       
+
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'product',
-      }
+        modelName: 'products',
+    }
 )
 
 module.exports = Products;

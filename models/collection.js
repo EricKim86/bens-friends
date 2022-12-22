@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Collections extends Model {}
+class Collections extends Model { }
 
 Collections.init(
 
@@ -11,21 +11,21 @@ Collections.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-    },
+        },
         user_id: {
             type: DataTypes.INTEGER,
             reference: {
                 model: 'users',
-                key:'id',
-                }
-    },
-        items: {
-            type: DataTypes.INT,
+                key: 'id',
+            }
+        },
+        products_id: {
+            type: DataTypes.INTEGER,
             reference: {
                 model: 'products',
-                key:'id',
-                 }
-         }
+                key: 'id',
+            }
+        }
     },
 
     {
@@ -34,7 +34,7 @@ Collections.init(
         freezeTableName: true,
         underscored: true,
         modelName: 'collections',
-      }
+    }
 )
 
 module.exports = Collections;
