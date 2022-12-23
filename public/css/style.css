@@ -1,1 +1,37 @@
-/* Add custom styles to bootstrap */
+html,
+body {
+    height: 100%;
+}
+
+.custom-header {
+    border-bottom: 2px solid #000;
+    height: 50px;
+    background-color: #1b98e0;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+#featured_user {
+    margin-top: 10px;
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.container {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.custom-arrow {
+    background-color: #1b98e0;
+}
