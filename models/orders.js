@@ -20,7 +20,7 @@ Orders.init(
       }
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     }
   },
 
