@@ -9,6 +9,7 @@ const productdata = [
         price: 20,
         status: true,
         categories_id: 1,
+        filename: '3-1.png',
     },
 
     //Tableware Products
@@ -18,6 +19,7 @@ const productdata = [
         price: 8,
         status: true,
         categories_id: 2,
+        filename: '3-1.png',
     },
 
     //Figure Products
@@ -27,6 +29,7 @@ const productdata = [
         price: 10,
         status: true,
         categories_id: 3,
+        filename: '3-1.png',
     },
     {
         prod_name: `2nd Edition Ben w/ Suit of Armor POP Figure`,
@@ -34,6 +37,7 @@ const productdata = [
         price: 15,
         status: true,
         categories_id: 3,
+        filename: '3-2.png',
     },
     {
         prod_name: `Ben Action Figure`,
@@ -41,6 +45,7 @@ const productdata = [
         price: 18,
         status: true,
         categories_id: 3,
+        filename: '3-3.png',
     },
     {
         prod_name: `3d Printed Ben D&D Character`,
@@ -48,6 +53,7 @@ const productdata = [
         price: 22,
         status: true,
         categories_id: 3,
+        filename: '3-4.png',
     },
     {
         prod_name: `Castle Play Set w/ real working drawbridge`,
@@ -55,6 +61,7 @@ const productdata = [
         price: 50,
         status: true,
         categories_id: 3,
+        filename: '3-5.png',
     },
 
     //Comic Products
@@ -64,6 +71,7 @@ const productdata = [
         price: 12,
         status: true,
         categories_id: 4,
+        filename: '3-1.png',
     },
 ];
 
