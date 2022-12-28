@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         user.get({ plain: true })
       );
   
-      res.render('test', {
+      res.render('home', {
         userProfile,
         loggedIn: req.session.loggedIn,
       });
@@ -29,6 +29,39 @@ router.get('/login', (req, res) => {
     return;
   }
   res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
+
+
+router.get('/myprofile', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('myprofile');
+});
+
+router.get('/explore', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('explore');
+});
+
+router.get('/shop', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('shop');
 });
 
   
