@@ -7,6 +7,11 @@ body {
   justify-content: flex-start;
 }
 
+.line{
+  display: inline;
+  text-decoration: none;
+}
+
 .link {
   color: #FFFFFF;
   text-decoration: none;

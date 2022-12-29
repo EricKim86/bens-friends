@@ -23,7 +23,6 @@ Orders.init(
       type: DataTypes.BOOLEAN,
     }
   },
-
   {
     sequelize,
     timestamps: false,

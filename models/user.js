@@ -35,16 +35,15 @@ User.init(
         len: [8],
       },
     },
+    city: {
+      type: DataTypes.STRING,
+    },
+    bio: {
+      type: DataTypes.STRING,
+    },
     profile_image: {
       type: DataTypes.STRING,
     },
-  //   attribute_id: {
-  //           type: DataTypes.INTEGER,
-  //     references: {
-  //         model: 'attribute',
-  //         key: 'id'
-  //     }
-  // },
   },
 
   {

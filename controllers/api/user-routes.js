@@ -8,6 +8,8 @@ router.post('/signup', async (req, res) => {
       user_name: req.body.user_name,
       email: req.body.email,
       password: req.body.password,
+      city: req.body.city,
+      bio: req.body.bio,
     });
 
     req.session.save(() => {

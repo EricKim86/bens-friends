@@ -28,19 +28,10 @@ router.get('/cart', async (req, res) => {
   }
 });
 
-// // render homepage
-// router.get('/cart', async (req, res) => {
-//   res.render('cart', {
-//     loggedIn: req.session.loggedIn,
-//   });
-// });
-
 // GET a user for profile
 router.get('/profile/:id', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
-      attributes: ['id', 'user_name', 'email'],
-    })
+    const userData = await User.findByPk(req.params.id)
   
     const userProfile = userData.get({ plain: true});
     
@@ -54,12 +45,37 @@ router.get('/profile/:id', async (req, res) => {
   }
 });
 
+// GET a user for explorer
+router.get('/user/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id)
+    const userInfo = userData.get({ plain: true});
+    
+    req.session.save(() => {
+      if (req.session.countVisit) {
+        req.session.countVisit++;
+      } else {
+        req.session.countVisit = 1;
+      }
+
+      res.render('user', {
+        userInfo,
+        loggedIn: req.session.loggedIn,
+        countVisit: req.session.countVisit,
+      });
+    });
+
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // GET all Users for Explore
 router.get('/explore', async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: ['id', 'user_name', 'email'],
-    });
+    const userData = await User.findAll({});
 
     const userProfile = userData.map((user) =>
       user.get({ plain: true })
@@ -95,7 +111,6 @@ router.get('/products', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // login route
 router.get('/login', (req, res) => {
