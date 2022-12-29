@@ -35,9 +35,18 @@ router.get('/profile/:id', async (req, res) => {
   
     const userProfile = userData.get({ plain: true});
     
-    res.render('profile', {
-      userProfile,
-      loggedIn: req.session.loggedIn,
+    req.session.save(() => {
+      if (req.session.countVisit) {
+        req.session.countVisit++;
+      } else {
+        req.session.countVisit = 1;
+      }
+
+      res.render('Profile', {
+        userProfile,
+        loggedIn: req.session.loggedIn,
+        countVisit: req.session.countVisit,
+      });
     });
   } catch (err) {
     console.log(err);
@@ -49,6 +58,7 @@ router.get('/profile/:id', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id)
+
     const userInfo = userData.get({ plain: true});
     
     req.session.save(() => {
