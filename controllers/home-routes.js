@@ -6,7 +6,7 @@ const { Products } = require('../models');
 router.get('/', async (req, res) => {
     try {
       const userData = await User.findAll({
-            attributes: ['user_name'],
+            attributes: ['user_name', 'email'],
       });
   
       const userProfile = userData.map((user) =>
@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 
 
   // GET all products
-  router.get('/products', async (req, res) => {
+  router.get('/shop', async (req, res) => {
     try {
       const productData = await Products.findAll({
       });
@@ -44,45 +44,13 @@ router.get('/', async (req, res) => {
     }
   });
 
-  // GET one product
-// router.get('/products/:id', async (req, res) => {
-//   try {
-//     const productData = await products.findByPk(req.params.id);
-
-//     const products = productData.get({ plain: true });
-//     res.render('products', { products, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
-
-  // login route
-router.get('/login', (req, res) => {
+  // profile route
+router.get('/profile', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-  res.render('login');
-});
-
-  // signup route
-router.get('/signup', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  res.render('signup');
-});
-
-  // myprofile route
-router.get('/myprofile', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  res.render('myprofile');
+  res.render('profile');
 });
 
   // explore route
@@ -93,15 +61,24 @@ router.get('/explore', (req, res) => {
   }
   res.render('explore');
 });
-
-  // shop route
-router.get('/shop', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  res.render('shop');
-});
-
   
+  // login route
+  router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect('/');
+      return;
+    }
+    res.render('login');
+  });
+  
+    // signup route
+  router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect('/');
+      return;
+    }
+    res.render('signup');
+  });
+  
+
   module.exports = router;

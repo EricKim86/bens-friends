@@ -1,3 +1,25 @@
+<nav class="sidebar d-lg-block bg-white">
+    <div>
+        <div class="list-group list-group-flush mx-3 mt-4">
+            <a href="/shop" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>All</span>
+            </a>
+            <a href="/categories/1" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Apparel</span>
+            </a>
+            <a href="/categories/2" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Tableware</span>
+            </a>
+            <a href="/categories/3" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Figures</span>
+            </a>
+            <a href="/categories/4" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Comics</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
 {{#each productList as |product|}}
-{{> product-details}}
+{{> shop-details}}
 {{/each}}
