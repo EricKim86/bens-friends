@@ -20,7 +20,7 @@ const productdata = [
         filename: '1-2.png',
     },
     {
-        prod_name: `Evil Justin baseball cap`,
+        prod_name: `Evil Justin Baseball Cap`,
         prod_description: `Fitted baseball cap inspired by Ben's nemsis, Evil Justin.`,
         price: 40,
         status: true,
@@ -37,7 +37,7 @@ const productdata = [
         filename: '2-1.png',
     },
     {
-        prod_name: `Fancy Custom Ben fork`,
+        prod_name: `Fancy Custom Ben Fork`,
         prod_description: 'Custom fork designed by Ben in the shape of a spoon.',
         price: 8,
         status: true,
@@ -79,7 +79,7 @@ const productdata = [
         filename: '3-4.png',
     },
     {
-        prod_name: `Castle Play Set w/ real working drawbridge`,
+        prod_name: `Castle Play Set w/ Real Working Drawbridge`,
         prod_description: '10 foot castle play set w/ a working wooden drawbridge and fillable moat.',
         price: 50,
         status: true,

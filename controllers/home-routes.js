@@ -1,84 +1,119 @@
 const router = require('express').Router();
-const { User } = require('../models');
-const { Products } = require('../models');
+const { Products, User } = require('../models');
 
-// GET all Users for homepage
+// render homepage
 router.get('/', async (req, res) => {
-    try {
-      const userData = await User.findAll({
-            attributes: ['user_name', 'email'],
-      });
+    res.render('home', {
+      loggedIn: req.session.loggedIn,
+    });
+});
+
+// GET all products
+router.get('/cart', async (req, res) => {
+  try {
+    const productData = await Products.findAll({
+    });
+
+    const cartList = productData.map((products) =>
+      products.get({ plain: true })
+    );
+
+    res.render('cart', {
+      cartList,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// // render homepage
+// router.get('/cart', async (req, res) => {
+//   res.render('cart', {
+//     loggedIn: req.session.loggedIn,
+//   });
+// });
+
+// GET a user for profile
+router.get('/profile/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      attributes: ['id', 'user_name', 'email'],
+    })
   
-      const userProfile = userData.map((user) =>
-        user.get({ plain: true })
-      );
-  
-      res.render('home', {
-        userProfile,
-        loggedIn: req.session.loggedIn,
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+    const userProfile = userData.get({ plain: true});
+    
+    res.render('profile', {
+      userProfile,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET all Users for Explore
+router.get('/explore', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: ['id', 'user_name', 'email'],
+    });
+
+    const userProfile = userData.map((user) =>
+      user.get({ plain: true })
+    );
+
+    res.render('explore', {
+      userProfile,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 
-  // GET all products
-  router.get('/shop', async (req, res) => {
-    try {
-      const productData = await Products.findAll({
-      });
-  
-      const productList = productData.map((products) =>
-        products.get({ plain: true })
-      );
-  
-      res.render('products', {
-        productList,
-        loggedIn: req.session.loggedIn,
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+// GET all products
+router.get('/products', async (req, res) => {
+  try {
+    const productData = await Products.findAll({
+    });
 
-  // profile route
-router.get('/profile', (req, res) => {
+    const productList = productData.map((products) =>
+      products.get({ plain: true })
+    );
+
+    res.render('products', {
+      productList,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+// login route
+router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-  res.render('profile');
+  res.render('login');
 });
 
-  // explore route
-router.get('/explore', (req, res) => {
+// signup route
+router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-  res.render('explore');
+  res.render('signup');
 });
-  
-  // login route
-  router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/');
-      return;
-    }
-    res.render('login');
-  });
-  
-    // signup route
-  router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/');
-      return;
-    }
-    res.render('signup');
-  });
-  
 
-  module.exports = router;
+
+module.exports = router;
