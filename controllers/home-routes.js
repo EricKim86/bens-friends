@@ -1,40 +1,21 @@
 const router = require('express').Router();
-const { Products, User } = require('../models');
+const { User, Products, Order_items, Orders } = require('../models');
 
 // render homepage
 router.get('/', async (req, res) => {
-    res.render('home', {
-      loggedIn: req.session.loggedIn,
-    });
+  res.render('home', {
+    loggedIn: req.session.loggedIn,
+  });
 });
 
-// GET all products
-router.get('/cart', async (req, res) => {
-  try {
-    const productData = await Products.findAll({
-    });
-
-    const cartList = productData.map((products) =>
-      products.get({ plain: true })
-    );
-
-    res.render('cart', {
-      cartList,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
 
 // GET a user for profile
 router.get('/profile', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id)
-  
-    const userProfile = userData.get({ plain: true});
-    
+
+    const userProfile = userData.get({ plain: true });
+
     req.session.save(() => {
       if (req.session.countVisit) {
         req.session.countVisit++;
@@ -54,13 +35,15 @@ router.get('/profile', async (req, res) => {
   }
 });
 
+
+
 // GET a user for explore
 router.get('/user/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id)
 
-    const userInfo = userData.get({ plain: true});
-    
+    const userInfo = userData.get({ plain: true });
+
     req.session.save(() => {
       if (req.session.countVisit) {
         req.session.countVisit++;
@@ -121,6 +104,120 @@ router.get('/products', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// GET all products in cart
+router.get('/cart', async (req, res) => {
+  try {
+    const productData = await Products.findAll({
+    });
+
+    const cartList = productData.map((products) =>
+      products.get({ plain: true })
+    );
+
+    res.render('cart', {
+      cartList,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// CREATE a new order
+router.post('/order', async (req, res) => {
+  try {
+    const orderData = await Orders.create({
+      user_id: req.body.user_id,
+      status: req.body.status,
+      products_id: req.body.products_id,
+    });
+
+    req.session.save(() => {
+      req.session.user_id = orderData.id;
+      req.session.loggedIn = true;
+
+      res.status(200).json(orderData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET an order by order #
+router.get('/order/:id', async (req, res) => {
+  try {
+    const orderData = await Orders.findByPk(req.params.id,
+      {
+      include: [
+        {
+          // model: User,
+          // attributes: ['id','user_name', 'email'],
+          model: Products,
+          attributes: ['prod_name'],
+        },
+      ],
+    });
+
+    const order = orderData.get({ plain: true });
+    res.render('orders', {
+      order,
+      loggedIn: req.session.loggedIn,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET an order by order #
+router.get('/order/:id', async (req, res) => {
+  try {
+    const orderData = await Orders.findByPk(req.params.id,
+      {
+      include: [
+        {
+          // model: User,
+          // attributes: ['id','user_name', 'email'],
+          model: Products,
+          attributes: ['prod_name'],
+        },
+      ],
+    });
+
+    const order = orderData.get({ plain: true });
+    res.render('orders', {
+      order,
+      loggedIn: req.session.loggedIn,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+// GET an order by order #
+router.get('/product/:id', async (req, res) => {
+  try {
+    const productData = await Products.findByPk(req.params.id)
+    
+    const products = productData.get({ plain: true });
+    res.render('productDetail', {
+      products,
+      loggedIn: req.session.loggedIn,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 
 // login route
 router.get('/login', (req, res) => {

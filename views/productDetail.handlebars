@@ -1,0 +1,84 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{products.prod_name}}</h3>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center"><img src="/images/{{products.filename}}" class="img-responsive" height="400px" width="400px"></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Product description</h4>
+                    <p>{{products.prod_description}}</p>
+                    <h2 class="mt-5">
+                        ${{products.price}}<small class="text-success">(0%off)</small>
+                    </h2>
+                    <button class="btn btn-primary btn-rounded">Add to Cart</button>
+                    <h3 class="box-title mt-5">Features</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>{{products.feature1}}</li>
+                        <li><i class="fa fa-check text-success"></i>{{products.feature2}}</li>
+                        <li><i class="fa fa-check text-success"></i>{{products.feature3}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- review section --}}
+<<section style="color: #000; background-color: #f3f2f2;">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="fw-bold mb-4">Reviews</h3>
+                <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+                    Check out what other users have to say about this product.
+                </p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="card">
+                    <div class="card-body py-4 mt-2">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="/images/default-profile.jfif" alt="Generic placeholder image"
+                                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                        </div>
+                        <h5 class="font-weight-bold">Eric</h5>
+                        <p class="mb-2">
+                        <p></i>eh... it's okay I guess.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="card">
+                    <div class="card-body py-4 mt-2">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="/images/default-profile.jfif" alt="Generic placeholder image"
+                                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                        </div>
+                        <h5 class="font-weight-bold">SuperCorgi</h5>
+                        <p class="mb-2">
+                        <p>bark...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-0">
+                <div class="card">
+                    <div class="card-body py-4 mt-2">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="/images/default-profile.jfif" alt="Generic placeholder image"
+                                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                        </div>
+                        <h5 class="font-weight-bold">Franklin</h5>
+
+                        <p class="mb-2">
+                        <p>How did I even end up on this website???</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>

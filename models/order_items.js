@@ -6,6 +6,12 @@ class Order_Items extends Model { }
 Order_Items.init(
 
     {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         orders_id: {
             type: DataTypes.INTEGER,
             references: {
