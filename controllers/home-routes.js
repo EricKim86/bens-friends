@@ -29,9 +29,9 @@ router.get('/cart', async (req, res) => {
 });
 
 // GET a user for profile
-router.get('/profile/:id', async (req, res) => {
+router.get('/profile', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id)
+    const userData = await User.findByPk(req.session.user_id)
   
     const userProfile = userData.get({ plain: true});
     
@@ -42,7 +42,7 @@ router.get('/profile/:id', async (req, res) => {
         req.session.countVisit = 1;
       }
 
-      res.render('Profile', {
+      res.render('profile', {
         userProfile,
         loggedIn: req.session.loggedIn,
         countVisit: req.session.countVisit,
@@ -54,7 +54,7 @@ router.get('/profile/:id', async (req, res) => {
   }
 });
 
-// GET a user for explorer
+// GET a user for explore
 router.get('/user/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id)

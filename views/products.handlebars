@@ -1,25 +1,32 @@
 <nav class="sidebar d-lg-block bg-white">
     <div>
-        <div class="list-group list-group-flush mx-3 mt-4">
-            <a href="#1" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fa fa-shopping-bag"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span> Apparel</span>
-            </a>
-            <a href="#2" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fa fa-coffee"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Tableware</span>
-            </a>
-            <a href="#3" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fa fa-child"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span> Figures</span>
-            </a>
-            <a href="#4" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fa fa-book"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Comics</span>
-            </a>
-            <a href="/cart" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fa fa-shopping-cart"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>View Cart</span>
-            </a>
+        <center>
+        <div class=" card" style="width: 13rem;">
+        <div class="card-body" style="background-color: rgb(227, 231, 231)">
+            <h5 class="card-title">Save Now!</h5>
+            <p class="card-text">Place an order today and receive free standard shipping.</p>
         </div>
+        </center>
+    </div>
+    <div class="list-group list-group-flush mx-3 mt-4">
+        <a href="#1" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fa fa-shopping-bag"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span> Apparel</span>
+        </a>
+        <a href="#2" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fa fa-coffee"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Tableware</span>
+        </a>
+        <a href="#3" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fa fa-child"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span> Figures</span>
+        </a>
+        <a href="#4" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fa fa-book"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Comics</span>
+        </a>
+        <a href="/cart" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fa fa-shopping-cart"></i><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>View Cart</span>
+        </a>
+    </div>
     </div>
 </nav>
-
 {{#each productList as |products|}}
 {{> products-details}}
 {{/each}}
