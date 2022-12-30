@@ -34,9 +34,15 @@ User.init(
       validate: {
         len: [8],
       },
-      sample_attribute1: {
-        type: DataTypes.BOOLEAN
-      }
+    },
+    city: {
+      type: DataTypes.STRING,
+    },
+    bio: {
+      type: DataTypes.STRING,
+    },
+    profile_image: {
+      type: DataTypes.STRING,
     },
   },
 

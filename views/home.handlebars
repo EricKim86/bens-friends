@@ -1,0 +1,11 @@
+<center>
+    <img src="/images/logo.png" alt="logo image" width="500" height="300">
+    <h5>A place to come together and appreciate Ben.</h5>
+    {{#if loggedIn}}
+    {{else}}
+    <div class="line">
+        <a href="/login">Login</a> /
+        <a href="/signup">Signup</a>
+    </div>
+    {{/if}}
+</center>

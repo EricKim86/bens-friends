@@ -24,6 +24,10 @@ Products.init(
         status: {
             type: DataTypes.BOOLEAN,
         },
+        filename: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         categories_id: {
             type: DataTypes.INTEGER,
             references: {
