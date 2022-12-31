@@ -37,6 +37,15 @@ Products.init(
         feature3: {
             type: DataTypes.STRING,
         },
+        testimonial: {
+            type: DataTypes.STRING,
+        },
+        testimonial_name: {
+            type: DataTypes.STRING,
+        },
+        testimonial_filename: {
+            type: DataTypes.STRING,
+        },
         categories_id: {
             type: DataTypes.INTEGER,
             references: {

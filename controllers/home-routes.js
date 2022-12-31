@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { User, Products, Order_items, Orders } = require('../models');
+const { request } = require('express');
+const { User, Products, Orders } = require('../models');
+
 
 // render homepage
 router.get('/', async (req, res) => {
@@ -146,66 +148,12 @@ router.post('/order', async (req, res) => {
   }
 });
 
-// GET an order by order #
-router.get('/order/:id', async (req, res) => {
-  try {
-    const orderData = await Orders.findByPk(req.params.id,
-      {
-      include: [
-        {
-          // model: User,
-          // attributes: ['id','user_name', 'email'],
-          model: Products,
-          attributes: ['prod_name'],
-        },
-      ],
-    });
 
-    const order = orderData.get({ plain: true });
-    res.render('orders', {
-      order,
-      loggedIn: req.session.loggedIn,
-    });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// GET an order by order #
-router.get('/order/:id', async (req, res) => {
-  try {
-    const orderData = await Orders.findByPk(req.params.id,
-      {
-      include: [
-        {
-          // model: User,
-          // attributes: ['id','user_name', 'email'],
-          model: Products,
-          attributes: ['prod_name'],
-        },
-      ],
-    });
-
-    const order = orderData.get({ plain: true });
-    res.render('orders', {
-      order,
-      loggedIn: req.session.loggedIn,
-    });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-
-// GET an order by order #
+// GET a product by ID
 router.get('/product/:id', async (req, res) => {
   try {
     const productData = await Products.findByPk(req.params.id)
-    
+
     const products = productData.get({ plain: true });
     res.render('productDetail', {
       products,
@@ -217,7 +165,6 @@ router.get('/product/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // login route
 router.get('/login', (req, res) => {
