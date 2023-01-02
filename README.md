@@ -3,8 +3,9 @@
 ## Description
 
 An e-commerce website to purchase interesting collectables and share your collection with 
-others.  The simple and clean homepage with featured users and their collections.  The 
+others.  The simple and clean homepage showcases featured users and their collections.  The 
 application has an intuitive search function.
+
 USER STORY:
 
 As a fan of collectables, I want have the ability to purchase, share, and provide feedback on my collection so that others can appreciate my collection.
