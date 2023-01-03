@@ -226,7 +226,7 @@ const productdata = [
         price: 35,
         status: true,
         categories_id: 4,
-        filename: '4-2.png',
+        filename: '4-6.png',
     }, 
 
     {
@@ -235,7 +235,7 @@ const productdata = [
         price: 2,
         status: true,
         categories_id: 4,
-        filename: '4-3.png',
+        filename: '4-7.png',
     }
 ];
 

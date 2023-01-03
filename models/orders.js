@@ -29,6 +29,9 @@ Orders.init(
         key: 'id'
       }
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+  }
   },
   {
     sequelize,
