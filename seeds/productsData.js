@@ -219,6 +219,24 @@ const productdata = [
         testimonial_name: 'Jason Morrison',
         testimonial_filename: 'profile15.avif',
     },
+
+    {
+        prod_name: `Argh, the Dungeon Master Saga`,
+        prod_description: 'Follow along as Ben seeks the holy grail of becoming a dungeon master... or not.',
+        price: 35,
+        status: true,
+        categories_id: 4,
+        filename: '4-2.png',
+    }, 
+
+    {
+        prod_name: `Ben chooses their own adventure!`,
+        prod_description: 'Unlike other choose your adventure style comics, Ben will tell you exactly what the story line is in this twist-of-fate dramedy',
+        price: 2,
+        status: true,
+        categories_id: 4,
+        filename: '4-3.png',
+    }
 ];
 
 const seedProducts = () => Products.bulkCreate(productdata);
