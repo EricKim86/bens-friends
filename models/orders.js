@@ -21,7 +21,14 @@ Orders.init(
     },
     status: {
       type: DataTypes.BOOLEAN,
-    }
+    },
+    products_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'products',
+        key: 'id'
+      }
+    },
   },
   {
     sequelize,

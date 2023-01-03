@@ -28,13 +28,31 @@ Products.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        feature1: {
+            type: DataTypes.STRING,
+        },
+        feature2: {
+            type: DataTypes.STRING,
+        },
+        feature3: {
+            type: DataTypes.STRING,
+        },
+        testimonial: {
+            type: DataTypes.STRING,
+        },
+        testimonial_name: {
+            type: DataTypes.STRING,
+        },
+        testimonial_filename: {
+            type: DataTypes.STRING,
+        },
         categories_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'categories',
                 key: 'id'
             }
-        }
+        },
     },
 
     {
