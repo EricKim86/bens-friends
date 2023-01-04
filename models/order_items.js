@@ -28,10 +28,9 @@ Order_Items.init(
         },
         quantity: {
             type: DataTypes.INTEGER,
+            defaultValue: 0,
         }
-
     },
-
     {
         sequelize,
         timestamps: false,

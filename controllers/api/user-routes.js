@@ -10,12 +10,12 @@ router.post('/signup', async (req, res) => {
       password: req.body.password,
       city: req.body.city,
       bio: req.body.bio,
+      profile_image: req.body.profile_image,
     });
 
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-
       res.status(200).json(dbUserData);
     });
   } catch (err) {

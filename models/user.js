@@ -44,7 +44,7 @@ User.init(
     profile_image: {
       type: DataTypes.STRING,
     },
-    order_id: {
+    orders_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'orders',
