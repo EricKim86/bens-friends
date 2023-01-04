@@ -53,6 +53,13 @@ Products.init(
                 key: 'id'
             }
         },
+        orders_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'orders',
+                key: 'id'
+            }
+        },
     },
 
     {

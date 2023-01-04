@@ -1,43 +1,50 @@
 <div class="main">
   <form class="form signup-form">
-    <h2 class="page-title">Signup</h2>
+    <h2 class="page-title">Signup:</h2>
     <!-- Username input -->
     <div class="form-outline mb-2">
-      <label class="form-label" for="username-signup">Username</label>
+      <label class="form-label" for="username-signup">Username:</label>
       <input type="text" id="username-signup" class="form-control" />
     </div>
 
     <!-- Email input -->
     <div class="form-outline mb-2">
-      <label class="form-label" for="email-signup">Email</label>
+      <label class="form-label" for="email-signup">Email:</label>
       <input type="text" id="email-signup" class="form-control" />
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-2">
-      <label class="form-label" for="password-signup">Password</label>
+      <label class="form-label" for="password-signup">Password:</label>
       <input type="password" id="password-signup" class="form-control" />
     </div>
 
     <!-- City input -->
     <div class="form-outline mb-2">
-      <label class="form-label" for="city-signup">City</label>
+      <label class="form-label" for="city-signup">City:</label>
       <input type="text" id="city-signup" class="form-control" />
     </div>
 
     {{!-- bio input --}}
     <div class="form-group mb-2">
-      <label class="form-label" for="form-label">Tell us about yourself!</label>
+      <label class="form-label" for="form-label">Tell us about yourself:</label>
       <textarea type="text" id="bio-signup" class="form-control" rows="3"></textarea>
     </div>
 
-      {{!-- upload image --}}
+    {{!-- upload image --}}
     <div class="form-group mb-2">
-      <label class="form-label" for="upload-signup">Upload Profile Image</label>
+      <label class="form-label" htmlfor="fileInput">Upload Profile Image:</label>
       <br>
-      <input type="file" name="image" onCharge={} value={} className="form-input" />
+      <input type="file" id="profile_image" />
+      <h5 id="errorMessage"></h5>
+      <center><img id="preview" class="profile"></center>
+      <br>
+      <div id="info" class="profile-section">
+        <p>Image Name: <span class="img-name"></span></p>
+        <p>Image Type: <span class="img-type"></span></p>
+        <p>Image Size: <span class="img-size"></span></p>
+      </div>
     </div>
-    <br>
 
     <!-- 2 column grid layout for inline styling -->
     <div class="row mb-4">

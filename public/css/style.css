@@ -84,6 +84,16 @@ body {
   color: #728299 !important;
 }
 
+.profile {
+  width: 200px;
+  height: auto;
+}
+
+.profile-section {
+  border-style: groove;
+  display: none;
+}
+
 @media (min-width: 1025px) {
   .h-custom {
     height: 100vh !important;

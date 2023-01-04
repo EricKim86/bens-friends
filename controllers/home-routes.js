@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
   });
 });
 
-
 // GET a user for profile
 router.get('/profile', async (req, res) => {
   try {
@@ -36,8 +35,6 @@ router.get('/profile', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 // GET a user for explore
 router.get('/user/:id', async (req, res) => {
@@ -107,18 +104,22 @@ router.get('/products', async (req, res) => {
   }
 });
 
-// GET all products in cart
+
+// GET all products in cart by order ID
 router.get('/cart', async (req, res) => {
   try {
-    const productData = await Products.findAll({
-    });
+    const orderData = await Orders.findAll(
+      {
+        where: { user_id: req.session.user_id },
+        include: [{ model: User }, { model: Products }],
+      });
 
-    const cartList = productData.map((products) =>
-      products.get({ plain: true })
+    const orderList = orderData.map((orders) =>
+      orders.get({ plain: true })
     );
 
     res.render('cart', {
-      cartList,
+      orderList,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -127,13 +128,12 @@ router.get('/cart', async (req, res) => {
   }
 });
 
-// CREATE a new order
-router.post('/order', async (req, res) => {
+// add product to a cart
+router.post('/cart', async (req, res) => {
   try {
     const orderData = await Orders.create({
       user_id: req.body.user_id,
       status: req.body.status,
-      products_id: req.body.products_id,
     });
 
     req.session.save(() => {
@@ -183,6 +183,5 @@ router.get('/signup', (req, res) => {
   }
   res.render('signup');
 });
-
 
 module.exports = router;
