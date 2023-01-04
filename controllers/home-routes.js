@@ -97,6 +97,7 @@ router.get('/products', async (req, res) => {
     res.render('products', {
       productList,
       loggedIn: req.session.loggedIn,
+      user_id: req.session.user_id 
     });
   } catch (err) {
     console.log(err);
@@ -128,63 +129,61 @@ router.get('/cart', async (req, res) => {
   }
 });
 
-// add product to a order
+// add product to cart
 router.post('/cart', async (req, res) => {
   try {
-    console.log(req.body);
     let orderData = await Orders.findAll(
       {
-        where: { user_id: req.body.user_id },
-        // where: { user_id: req.session.user_id },
+        where: { user_id: req.session.user_id },
       }
       );
-      // console.log("ORDER DATA ON LINE 140", orderData);
     if (orderData.length === 0 ) {
-      // orderData = await Orders.create({
         let newOrderData = await Orders.create({
-        user_id: req.body.user_id 
-        // user_id: req.session.user_id
+        // user_id: req.body.user_id 
+        user_id: req.session.user_id
       })
-      let orderItem = await Order_items.findOne({
+      let orderItem = await Order_items.findAll({
         where: { orders_id: newOrderData.id },
       });
-      if (!orderItem) orderItem = await Order_items.create({
+        if (!orderItem) orderItem = await Order_items.create({
         orders_id: newOrderData.id,
         products_id: req.body.products_id,
       })
-      const updatedOrderItems = await Order_items.update({ quantity: orderItem.quantity + 1 }, {
-        where: {
-          user_id: req.body.user_id ,
-          // user_id: req.session.user_id,
-          orders_id: newOrderData.id,
-        }
-      })
-      res.json(updatedOrderItems)
+    
+      res.json(orderItem)
       return;
-      // console.log("DID WE GET HERE???", newOrderData);
     }
-
-    console.log("THIS IS ORDER DATA", orderData[0]);
-    // res.json(orderData)
-    let orderItem = await Order_items.findOne({
+    let orderItem = await Order_items.findAll({
       where: { orders_id: orderData[0].id},
     });
-    console.log("THIS IS", orderItem);
-    // res.json(orderItem)
-    if (!orderItem) orderItem = await Order_items.create({
+    Order_items.create({
       orders_id: orderData[0].id,
       products_id: req.body.products_id,
     })
-    const updatedOrderItems = await Order_items.update({ quantity: orderItem.quantity + 1 }, {
-      where: {
-        // user_id: req.body.user_id ,
-        // user_id: req.session.user_id,
-        orders_id: orderData[0].id,
-      }
-    })
-    res.json(updatedOrderItems)
+  
+    res.json(orderItem)
   } catch (err) {
     console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+//delete a product from cart
+router.delete('/cart', async (req, res) => {
+  try {
+    const productData = await Order_items.destroy({
+      where: {
+        products_id: req.body.products_id,
+      },
+    });
+
+    if (!productData) {
+      res.status(404).json({ message: 'This item does not exist!' });
+      return;
+    }
+
+    res.status(200).json(productData);
+  } catch (err) {
     res.status(500).json(err);
   }
 });

@@ -26,10 +26,6 @@ Order_Items.init(
                 key: 'id'
             }
         },
-        quantity: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-        }
     },
     {
         sequelize,
