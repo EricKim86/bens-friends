@@ -1,14 +1,6 @@
-<h4>Order Record Found:</h4>
-<h5>User Model:</h5>
-<h6>User ID: {{user_id}}</h6>
-<br>
-<h5>Products Model:</h5>
-<h6>Product id: {{orderList.products_id}}</h6>
-<h6>Product Name: {{orderList.prod_name}}</h6>
-<br>
 {{log this}}
 
-{{!-- <section class="h-100 h-custom" style="background-color: #ffffff;">
+<section class="h-100 h-custom" style="background-color: #ffffff;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12">
@@ -19,27 +11,34 @@
                                 <div class="p-5">
                                     <div class="d-flex justify-content-between align-items-center mb-5">
                                         <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                                        <h6 class="mb-0 text-muted">1 item</h6>
+                                        <h6 class="mb-0 text-muted">items</h6>
                                     </div>
                                     <hr class="my-4">
 
+                                    {{#each products}}
                                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
                                             <img src="/images/{{filename}}" class="img-fluid rounded-3"
                                                 alt="Cotton T-shirt">
                                         </div>
-                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                        <div class="col-md-5 col-lg-5 col-xl-5">
                                             <h6 class="text-muted">{{prod_name}}</h6>
                                         </div>
-                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                        <div class="col-md-1 col-lg-1 col-xl-1 d-flex">
 
                                             <input id="form1" min="0" name="quantity" value="1" type="number"
                                                 class="form-control form-control-sm" />
                                         </div>
-                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <div class="col-md-1 col-lg-1 col-xl-1 offset-lg-1">
                                             <h6 class="mb-0">${{price}}</h6>
                                         </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 offset-lg-1">
+
+                                            <button type="button" class="btn btn-dark btn-block btn-lg" data-id="{{id}}"
+                                                data-mdb-ripple-color="dark"><i class="fa fa-trash"></i></button>
+                                        </div>
                                     </div>
+                                    {{/each}}
 
                                     <hr class="my-4">
 
@@ -53,17 +52,23 @@
                                     <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                     <hr class="my-4">
 
-                                    <div class="d-flex justify-content-between mb-4">
-                                        <h5 class="text-uppercase">items 1</h5>
-                                        <h5>${{price}}</h5>
+                                    <h5 class="text-uppercase mb-3">Payment</h5>
+                                    <div class="mb-4 pb-2">
+                                        <select class="select">
+                                            <option value="1">Please select a payment method</option>
+                                            <option value="2">Credit Card</option>
+                                            <option value="3">PayPal</option>
+                                            <option value="4">Ben Bucks</option>
+                                        </select>
                                     </div>
 
                                     <h5 class="text-uppercase mb-3">Shipping</h5>
-
                                     <div class="mb-4 pb-2">
                                         <select class="select">
-                                            <option value="1">Free Standard Delivery</option>
-                                            <option value="2">Next Day Air - Not Available</option>
+                                            <option value="1">Please select a shipping method</option>
+                                            <option value="2">Standard Delivery - FREE</option>
+                                            <option value="3">2nd Day Air</option>
+                                            <option value="4">Next Day Air - Not Available</option>
                                         </select>
                                     </div>
 
@@ -71,7 +76,7 @@
 
                                     <div class="d-flex justify-content-between mb-5">
                                         <h5 class="text-uppercase">Total price</h5>
-                                        <h5>${{price}}</h5>
+                                        <h5>${{products.0.price}}</h5>
                                     </div>
 
                                     <button type="button" class="btn btn-dark btn-block btn-lg"
@@ -85,4 +90,5 @@
             </div>
         </div>
     </div>
-</section> --}}
+</section>
+

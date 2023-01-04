@@ -27,6 +27,13 @@
     </div>
     </div>
 </nav>
+
+<section id="product-feed" data-user-id="{{user_id}}">
 {{#each productList as |products|}}
 {{> products-details}}
 {{/each}}
+</section>
+
+{{log this}}
+
+<script src="./js/cart.js"></script>
