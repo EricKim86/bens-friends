@@ -145,6 +145,7 @@ router.get('/product/:id', async (req, res) => {
     const products = productData.get({ plain: true });
     res.render('productDetail', {
       products,
+      user_id: req.session.user_id,
       loggedIn: req.session.loggedIn,
     });
 

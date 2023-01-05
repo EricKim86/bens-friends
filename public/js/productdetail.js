@@ -1,7 +1,7 @@
-const AddProductHandler = async (event) => {
+const AddProductHandler2 = async (event) => {
 
     if (event.target.hasAttribute('data-id')) {
-        console.log("BUTTON WORKS!!!!!!!!!!!!!!!!!!!!!");
+        console.log("THIS BUTTON FUNCTIONS!");
         const user_id = document.querySelector("#product-feed").getAttribute("data-user-id")
         const products_id = event.target.getAttribute("data-id")
         const response = await fetch(`/cart`, {
@@ -21,4 +21,4 @@ const AddProductHandler = async (event) => {
 };
 
 document.querySelector("#product-feed")
-    .addEventListener('click', AddProductHandler);
+    .addEventListener('click', AddProductHandler2);

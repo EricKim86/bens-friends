@@ -1,5 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+<section id="product-feed" data-user-id="{{user_id}}">
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -25,7 +25,11 @@
                     <h2 class="mt-5">
                         ${{products.price}}<small class="text-success"></small>
                     </h2>
-                    <button class="btn btn-primary btn-rounded">Add to Cart</button>
+
+                    <button type="submit" class="btn btn-primary btn-rounded" data-id="{{products.id}}"
+                            data-user-id="{{user_id}}">Add to Cart</button>
+
+
                     <div class="pt-2">
                         <h6 class="mb-0"><a href="/products" class="text-body">Back to shop</a></h6>
                     </div>
@@ -41,28 +45,29 @@
     </div>
 </div>
 {{!-- testimonial --}}
-<section class="p-4 p-md-5 text-center text-lg-start shadow-1-strong rounded" style="background-image: url(/images/background-testimonial.avif);">
-  <div class="row d-flex justify-content-center">
-    <div class="col-md-10">
-      <div class="card">
-        <div class="card-body m-3">
-          <div class="row">
-            <div class="col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
-              <img src="/images/{{products.testimonial_filename}}"
-                class="rounded-circle img-fluid shadow-1" alt="avatar" width="200" height="200" />
+<section class="p-4 p-md-5 text-center text-lg-start shadow-1-strong rounded"
+    style="background-image: url(/images/background-testimonial.avif);">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body m-3">
+                    <div class="row">
+                        <div class="col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
+                            <img src="/images/{{products.testimonial_filename}}"
+                                class="rounded-circle img-fluid shadow-1" alt="avatar" width="200" height="200" />
+                        </div>
+                        <div class="col-lg-8">
+                            <p class="fw-light mb-4">
+                            <h3 class="fw-bold mb-4">Featured Testimonial</h3>
+                            {{products.testimonial}}
+                            </p>
+                            <p class="fw-bold lead mb-2"><strong>{{products.testimonial_name}}</strong></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-8">
-              <p class="fw-light mb-4">
-                <h3 class="fw-bold mb-4">Featured Testimonial</h3>
-                {{products.testimonial}}
-              </p>
-              <p class="fw-bold lead mb-2"><strong>{{products.testimonial_name}}</strong></p>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 {{!-- review section --}}
@@ -83,7 +88,8 @@
                     <div class="card-body py-4 mt-2">
                         <div class="d-flex justify-content-center mb-4">
                             <img src="/images/review1.avif" alt="Generic placeholder image"
-                                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 190px; height: 265px; z-index: 1">
+                                class="img-fluid img-thumbnail mt-4 mb-2"
+                                style="width: 190px; height: 265px; z-index: 1">
                         </div>
                         <h5 class="font-weight-bold">Hannah</h5>
                         <p class="mb-2">
@@ -121,5 +127,6 @@
         </div>
     </div>
     </section>
-    
-    <script src="./js/cart.js"></script>
+    </section>
+
+<script src="/js/productdetail.js"></script>
