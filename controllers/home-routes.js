@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { request } = require('express');
-const { User, Products, Orders, Order_items } = require('../models');
+const { User, Products, Orders, Order_items, CollectionProduct, Collections } = require('../models');
 
 
 // render homepage
@@ -12,10 +11,27 @@ router.get('/', async (req, res) => {
 
 // GET a user for profile
 router.get('/profile', async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id)
 
+  try {
+    const userData = await User.findOne(
+      {
+        where: { id: req.session.user_id },
+      });
+    const collectionData = await CollectionProduct.findOne(
+      {
+        where: { id: req.session.user_id },
+      });
     const userProfile = userData.get({ plain: true });
+
+    const currentCollectionData = await Collections.findOne({
+      where: {
+        // id: collectionData.collections_id,
+        id:  req.session.user_id, 
+      },
+      include: [{ model: Products, through: CollectionProduct }],
+    })
+    const currentCollection = currentCollectionData.get({ plain: true });
+
 
     req.session.save(() => {
       if (req.session.countVisit) {
@@ -23,9 +39,10 @@ router.get('/profile', async (req, res) => {
       } else {
         req.session.countVisit = 1;
       }
-
+      console.log("#1", currentCollection);
       res.render('profile', {
         userProfile,
+        currentCollection,
         loggedIn: req.session.loggedIn,
         countVisit: req.session.countVisit,
       });
@@ -39,9 +56,24 @@ router.get('/profile', async (req, res) => {
 // GET a user for explore
 router.get('/user/:id', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id)
+    const userData = await User.findOne(
+      {
+        where: { id: req.params.id },
+      });
+    const collectionData = await CollectionProduct.findOne(
+      {
+        where: { id: req.params.id },
+      });
+    const userProfile = userData.get({ plain: true });
 
-    const userInfo = userData.get({ plain: true });
+    const currentCollectionData = await Collections.findOne({
+      where: {
+        id:  req.params.id, 
+      },
+      include: [{ model: Products, through: CollectionProduct }],
+    })
+    const currentCollection = currentCollectionData.get({ plain: true });
+
 
     req.session.save(() => {
       if (req.session.countVisit) {
@@ -49,20 +81,20 @@ router.get('/user/:id', async (req, res) => {
       } else {
         req.session.countVisit = 1;
       }
-
-      res.render('user', {
-        userInfo,
+      console.log("#1", currentCollection);
+      res.render('profile', {
+        userProfile,
+        currentCollection,
         loggedIn: req.session.loggedIn,
         countVisit: req.session.countVisit,
       });
     });
-
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
 
 // GET all Users for Explore
 router.get('/explore', async (req, res) => {
@@ -97,7 +129,7 @@ router.get('/products', async (req, res) => {
     res.render('products', {
       productList,
       loggedIn: req.session.loggedIn,
-      user_id: req.session.user_id 
+      user_id: req.session.user_id
     });
   } catch (err) {
     console.log(err);
@@ -148,40 +180,31 @@ router.get('/cart', async (req, res) => {
 // add product to cart
 router.post('/cart', async (req, res) => {
   try {
-    let orderData = await Orders.findAll(
+    let orderData = await Orders.findOne(
       {
         where: { user_id: req.session.user_id },
       }
-      );
-    if (orderData.length === 0 ) {
-        let newOrderData = await Orders.create({
-        user_id: req.session.user_id
-      })
-      let orderItem = await Order_items.findAll({
-        where: { orders_id: newOrderData.id },
-      });
-        if (!orderItem) orderItem = await Order_items.create({
-        orders_id: newOrderData.id,
+    );
+    let orderItem = await Order_items.findOne({
+      where: {
+        orders_id: orderData.id,
         products_id: req.body.products_id,
-      })
-    
-      res.json(orderItem)
-      return;
-    }
-    let orderItem = await Order_items.findAll({
-      where: { orders_id: orderData[0].id},
+      },
     });
-    Order_items.create({
-      orders_id: orderData[0].id,
+    if (!orderItem) orderItem = await Order_items.create({
+      orders_id: orderData.id,
       products_id: req.body.products_id,
-    })
-  
+    });
+
     res.json(orderItem)
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+
 
 //delete a product from cart
 router.delete('/cart', async (req, res) => {

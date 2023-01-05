@@ -20,3 +20,5 @@ const DeleteProductHandler = async (event) => {
 
 document
     .addEventListener('click', DeleteProductHandler);
+
+    

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Orders, Collections } = require('../../models');
 
 // CREATE new user
 router.post('/signup', async (req, res) => {
@@ -12,6 +12,14 @@ router.post('/signup', async (req, res) => {
       bio: req.body.bio,
       profile_image: req.body.profile_image,
     });
+
+    await Orders.create({
+      user_id: dbUserData.id
+    })
+
+    await Collections.create({
+      user_id: dbUserData.id
+    })
 
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
