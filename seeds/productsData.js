@@ -227,6 +227,15 @@ const productdata = [
         status: true,
         categories_id: 4,
         filename: '4-6.png',
+<<<<<<< HEAD
+=======
+        feature1: 'Detailed adventure of Ben becoming a world-class DM',
+        feature2: 'Super heavy',
+        feature3: '200 illustrated pages all showing the same image of Ben',
+        testimonial: 'I am not even sure what a Dungeon Master is but this book is fantastic as a door stop.',
+        testimonial_name: 'Harrison Chevy',
+        testimonial_filename: 'profile16.avif',
+>>>>>>> 4a09c67bc1717d3cf541ab04128d6f764cd5c735
     }, 
 
     {
@@ -236,6 +245,15 @@ const productdata = [
         status: true,
         categories_id: 4,
         filename: '4-7.png',
+<<<<<<< HEAD
+=======
+        feature1: 'No need to make any decisions',
+        feature2: 'You will laugh',
+        feature3: 'You will cry',
+        testimonial: 'What is better than a choose your own adventure where you cannot choose your own adventure.  Choices are tough and this book removes them all for you!.',
+        testimonial_name: 'Jimmy Bean',
+        testimonial_filename: 'profile17.avif',
+>>>>>>> 4a09c67bc1717d3cf541ab04128d6f764cd5c735
     }
 ];
 

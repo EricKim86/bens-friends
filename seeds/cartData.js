@@ -1,15 +1,13 @@
 const { Orders } = require('../models');
 
 const orderdata = [
+    {
+        user_id: 1,
+        products_id: 5,
+    },
+];
 
-{
-    user_id: 1,
-    products_id: 1,
+const seedOrder = () => Orders.bulkCreate(orderdata);
 
-}
+module.exports = seedOrder;
 
-]
-
-const seedOrders = () => Orders.bulkCreate(orderdata);
-
-module.exports = seedOrders;

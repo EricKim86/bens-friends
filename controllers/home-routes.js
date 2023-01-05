@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const {request} = require('express');
-const { User,Products,Orders} = require('../models');
-const withAuth = require('../utils/auth');
+const { request } = require('express');
+const { User, Products, Orders, Order_items } = require('../models');
+
 
 // render homepage
 router.get('/', async (req, res) => {
@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     loggedIn: req.session.loggedIn,
   });
 });
-
 
 // GET a user for profile
 router.get('/profile', async (req, res) => {
@@ -38,7 +37,6 @@ router.get('/profile', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // GET a user for explore
 router.get('/user/:id', async (req, res) => {
@@ -115,136 +113,89 @@ router.get('/products', async (req, res) => {
 });
 
 
-// Get Cart
-router.get('/cart', withAuth, async (req, res) => {
+// GET all products in cart by order ID
+router.get('/cart', async (req, res) => {
   try {
-    const userOrder = await Orders.findByPk(req.session.user_id)
+    const orderData = await Orders.findAll(
+      {
+        where: { user_id: req.session.user_id },
+        include: [{ model: User }, { model: Products, through: Order_items }],
+      });
 
-  const userCart = userOrder.get({
-    plain: true
-  });
+    const orderList = orderData.map((orders) =>
+      orders.get({ plain: true })
+    );
 
-    res.render('order', {
-      userCart,
+    res.render('cart', {
+      orderList,
       loggedIn: req.session.loggedIn,
     });
 
-    } catch (err) {
-  console.log(err);
-  res.status(500).json(err);
-    };
-  });
-
-
-// Creating / Updating Cart
-router.post('/cart', withAuth, async (req, res) => {
-      const user = req.body.user_id;
-
-      const { products_id, quantity} = req.body;
-
-      try {
-        const cart = await Cart.findOne({user});
-        const item = await Products.findOne({products: id});
-        if (!item) {
-          res.status(404).json("Product doesn't exist");
-          return;
-        }
-        const price = item.price;
-        const productName = item.prod_name;
-
-      } catch (err) {
-              console.log(err);
-              res.status(500).json(err);
-  }})
-
-
-        // if we need to create a new cart 
-// const newCart = await Cart.create({
-//   user, 
-//   items: [{itemId, productName, quantity, price}],
-//   bill: quantity  * price,
-// })
-// return res.status(200).json(newCart);
-
-      // }
-      // });
-
-
-  // TODO Remove items from cart
-
-  // router.delete('/cart', withAuth, async (req, res) => {
-  //   const user = req.user;
-  //   const itemId = req.params.itemId;
-
-  //   try {
-  //     let cart = await Cart.findOne({user});
-  //     const itemIndex = cart.item.findIndex((item) => item.itemId == itemId);
-  //   } catch (error) {
-      
-  //   }
-  // })
-
-    //  get cart route
-    // router.get('/cart', async (req, res) => {
-    //   try {
-    //     const productData = await Products.findAll({
-    //     });
-
-    //     const cartList = productData.map((products) =>
-    //       products.get({ plain: true })
-    //     );
-
-    //     res.render('cart', {
-    //       cartList,
-    //       loggedIn: req.session.loggedIn,
-    //     });
-    //   } catch (err) {
-    //     console.log(err);
-    //     res.status(500).json(err);
-    //   }
-    // });
-
-
-    // CREATE a new order
-    // router.post('/order', async (req, res) => {
-    //   try {
-    //     const orderData = await Orders.create({
-    //       user_id: req.body.user_id,
-    //       status: req.body.status,
-    //       products_id: req.body.products_id,
-    //     });
-
-    //     req.session.save(() => {
-    //       req.session.user_id = orderData.id;
-    //       req.session.loggedIn = true;
-
-    //       res.status(200).json(orderData);
-    //     });
-    //   } catch (err) {
-    //     console.log(err);
-    //     res.status(500).json(err);
-    //   }
-    // });
-
-
-    // GET a product by ID
-    router.get('/product/:id', async (req, res) => {
-      try {
-        const productData = await Products.findByPk(req.params.id)
-
-        const products = productData.get({
-          plain: true
-        });
-        res.render('productDetail', {
-          products,
-          loggedIn: req.session.loggedIn,
-        });
-
-      } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+// add product to a order
+router.post('/cart', async (req, res) => {
+  try {
+    console.log(req.body);
+    let orderData = await Orders.findAll(
+      {
+        where: { user_id: req.body.user_id },
+        // where: { user_id: req.session.user_id },
       }
+      );
+      // console.log("ORDER DATA ON LINE 140", orderData);
+    if (orderData.length === 0 ) {
+      // orderData = await Orders.create({
+        let newOrderData = await Orders.create({
+        user_id: req.body.user_id 
+        // user_id: req.session.user_id
+      })
+      let orderItem = await Order_items.findOne({
+        where: { orders_id: newOrderData.id },
+      });
+      if (!orderItem) orderItem = await Order_items.create({
+        orders_id: newOrderData.id,
+        products_id: req.body.products_id,
+      })
+      const updatedOrderItems = await Order_items.update({ quantity: orderItem.quantity + 1 }, {
+        where: {
+          user_id: req.body.user_id ,
+          // user_id: req.session.user_id,
+          orders_id: newOrderData.id,
+        }
+      })
+      res.json(updatedOrderItems)
+      return;
+      // console.log("DID WE GET HERE???", newOrderData);
+    }
+
+    console.log("THIS IS ORDER DATA", orderData[0]);
+    // res.json(orderData)
+    let orderItem = await Order_items.findOne({
+      where: { orders_id: orderData[0].id},
     });
+    console.log("THIS IS", orderItem);
+    // res.json(orderItem)
+    if (!orderItem) orderItem = await Order_items.create({
+      orders_id: orderData[0].id,
+      products_id: req.body.products_id,
+    })
+    const updatedOrderItems = await Order_items.update({ quantity: orderItem.quantity + 1 }, {
+      where: {
+        // user_id: req.body.user_id ,
+        // user_id: req.session.user_id,
+        orders_id: orderData[0].id,
+      }
+    })
+    res.json(updatedOrderItems)
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET a product by ID
+router.get('/product/:id', async (req, res) => {
+  try {
+    const productData = await Products.findByPk(req.params.id)
 
     // login route
     router.get('/login', (req, res) => {
@@ -263,6 +214,5 @@ router.post('/cart', withAuth, async (req, res) => {
       }
       res.render('signup');
     });
-
-
-    module.exports = router;
+  }
+module.exports = router;
