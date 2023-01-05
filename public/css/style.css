@@ -32,6 +32,22 @@ ul {
   justify-content: center;
 }
 
+.glide__slide {
+  filter: blur(6px);
+  opacity: .7;
+  transition: .1s linear;
+}
+
+.glide__slide--active {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.1);
+}
+
+.glide__slides {
+  overflow: visible;
+}
+
 .gradient-custom {
   background: #000000;
 }

@@ -12,7 +12,6 @@ const DeleteProductHandler = async (event) => {
 
         if (response.ok) {
             document.location.replace('/cart');
-            alert('Product removed from cart');
         } else {
             alert('Failed to delete product');
         }
@@ -20,5 +19,4 @@ const DeleteProductHandler = async (event) => {
 };
 
 document
-    // .querySelector("#cart-feed")
     .addEventListener('click', DeleteProductHandler);
