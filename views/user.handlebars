@@ -5,27 +5,27 @@
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(0, 0, 0); height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-              <img src="/images/{{userInfo.profile_image}}" alt="Generic placeholder image"
-                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 120px; z-index: 1">
+              <img src="{{userProfile.profile_image}}" alt="Generic placeholder image"
+                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
             </div>
             <div class="ms-3" style="margin-top: 130px;">
-              <h5>{{userInfo.user_name}}</h5>
-              <p>{{userInfo.city}}</p>
+              <h5>{{userProfile.user_name}}</h5>
+              <p>{{userProfile.city}}</p>
             </div>
           </div>
           <div class="p-1 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div class="px-3">
+                <p class="mb-1 h5">{{userProfile.email}}</p>
+                <p class="small text-muted mb-0">Email</p>
+              </div>
+              <div class="px-3">
                 <p class="mb-1 h5">{{countVisit}}</p>
                 <p class="small text-muted mb-0">Profile Views</p>
               </div>
               <div class="px-3">
-                <p class="mb-1 h5">{{userInfo.id}}</p>
+                <p class="mb-1 h5">{{userProfile.id}}</p>
                 <p class="small text-muted mb-0">Member #</p>
-              </div>
-              <div class="px-3">
-                <p class="mb-1 h5">4</p>
-                <p class="small text-muted mb-0">Items</p>
               </div>
             </div>
           </div>
@@ -33,32 +33,44 @@
             <div class="mb-2">
               <p class="lead fw-normal mb-1">Bio</p>
               <div class="p-4" style="background-color: #f8f9fa;">
-                <p class="font-italic mb-1">{{userInfo.bio}}</p>
-                <p class="font-italic mb-1">{{userInfo.order_id}}</p>
+                <p class="font-italic mb-1">{{userProfile.bio}}</p>
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
               <p class="lead fw-normal mb-0">Collection</p>
             </div>
-            <div class="row g-2">
-              <div class="col mb-2">
-                <img src="/images/1-2.png" alt="image 1" class="w-100 rounded-3">
+            <div class="glide">
+              <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                  {{#each currentCollection.products}}
+                  <li class="glide__slide">
+                    <img src="/images/{{filename}}" alt="image" class="w-100 rounded-3">
+                       <center><h6>{{prod_name}}</h6></center>
+                  </li>
+                  {{/each}}
+                </ul>
               </div>
-              <div class="col mb-2">
-                <img src="/images/3-2.png" alt="image 1" class="w-100 rounded-3">
-              </div>
-            </div>
-            <div class="row g-2">
-              <div class="col">
-                <img src="/images/3-4.png" alt="image 1" class="w-100 rounded-3">
-              </div>
-              <div class="col">
-                <img src="/images/4-1.png" alt="image 1" class="w-100 rounded-3">
+              <div class="glide__bullets" data-glide-el="controls[nav]">
+                <center>
+                  <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                  </div>
+                </center>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script>
+  new Glide('.glide', {
+    type: 'carousel',
+    perView: 3,
+    focusAt: 'center',
+    gap: 20,
+  }).mount()
+</script>

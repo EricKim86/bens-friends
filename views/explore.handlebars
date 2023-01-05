@@ -1,18 +1,30 @@
-<div class="glide">
-    <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-            {{#each userProfile as |user|}}
-            <li class="glide__slide">{{> explore-details}}</li>
-            {{/each}}
-        </ul>
-    </div>
-    <div class="glide__bullets" data-glide-el="controls[nav]">
-        <center>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fa fa-arrow-circle-o-left" style="font-size:24px"></i></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-            </div>
-        </center>
+<div class="container">
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                {{#each userProfile as |user|}}
+                <li class="glide__slide">{{> explore-details}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            <center>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                </div>
+            </center>
+        </div>
     </div>
 </div>
 </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+  <script>
+    new Glide('.glide', {
+      type: 'carousel',
+      perView: 1,
+      focusAt: 'center',
+      gap: 20,
+    }).mount()
+  </script>

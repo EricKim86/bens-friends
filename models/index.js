@@ -1,9 +1,10 @@
 const User = require("./user");
 const Orders = require("./orders");
-const Collection = require("./collection");
+const Collections = require("./collection");
 const Categories = require("./categories");
 const Products = require("./products");
 const Order_items = require("./order_items");
+const CollectionProduct = require("./collectionProduct");
 
 
 User.hasMany(Orders, {
@@ -24,5 +25,21 @@ Products.belongsToMany(Orders, {
     foreignKey: 'products_id',
 });
 
-module.exports = { User, Orders, Collection, Categories, Products, Order_items };
+Collections.belongsToMany(Products, {
+    through: CollectionProduct,
+    foreignKey: 'collections_id',
+});
+
+Products.belongsToMany(Collections, {
+    through: CollectionProduct,
+    foreignKey: 'products_id',
+});
+
+// User.belongsToMany(Products, {
+//     through: CollectionProduct,
+//     foreignKey: 'user_id',
+// });
+
+
+module.exports = { User, Orders, Collections, Categories, Products, Order_items, CollectionProduct };
 

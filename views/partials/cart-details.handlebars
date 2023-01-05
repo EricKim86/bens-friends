@@ -1,5 +1,3 @@
-{{log this}}
-
 <section class="h-100 h-custom" style="background-color: #ffffff;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -19,7 +17,7 @@
                                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
                                             <img src="/images/{{filename}}" class="img-fluid rounded-3"
-                                                alt="Cotton T-shirt">
+                                                alt="product">
                                         </div>
                                         <div class="col-md-5 col-lg-5 col-xl-5">
                                             <h6 class="text-muted">{{prod_name}}</h6>
@@ -79,8 +77,9 @@
                                         <h5>${{products.0.price}}</h5>
                                     </div>
 
-                                    <button type="button" class="btn btn-dark btn-block btn-lg"
-                                        data-mdb-ripple-color="dark">Place Order</button>
+                                    <button type="button" id="#checkout-feed" class="btn btn-dark btn-block btn-lg"
+                                        data-mdb-ripple-color="dark" checkout-data-user-id="{{user_id}}">Place Order
+                                        </button>
 
                                 </div>
                             </div>
@@ -91,4 +90,6 @@
         </div>
     </div>
 </section>
+
+
 
