@@ -105,6 +105,22 @@ router.get('/products', async (req, res) => {
   }
 });
 
+// GET a product by ID
+router.get('/product/:id', async (req, res) => {
+  try {
+    const productData = await Products.findByPk(req.params.id)
+
+    const products = productData.get({ plain: true });
+    res.render('productDetail', {
+      products,
+      loggedIn: req.session.loggedIn,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // GET all products in cart by order ID
 router.get('/cart', async (req, res) => {
@@ -139,7 +155,6 @@ router.post('/cart', async (req, res) => {
       );
     if (orderData.length === 0 ) {
         let newOrderData = await Orders.create({
-        // user_id: req.body.user_id 
         user_id: req.session.user_id
       })
       let orderItem = await Order_items.findAll({
@@ -184,23 +199,6 @@ router.delete('/cart', async (req, res) => {
 
     res.status(200).json(productData);
   } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// GET a product by ID
-router.get('/product/:id', async (req, res) => {
-  try {
-    const productData = await Products.findByPk(req.params.id)
-
-    const products = productData.get({ plain: true });
-    res.render('productDetail', {
-      products,
-      loggedIn: req.session.loggedIn,
-    });
-
-  } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });

@@ -10,13 +10,11 @@ const signupFormHandler = async (event) => {
   const city = document.querySelector('#city-signup').value.trim();
   const bio = document.querySelector('#bio-signup').value.trim();
   const profile_image = document.querySelector('#uploadedimage').src;
-  console.log("THIS IS THE PROFILE SRC", profile_image);
-
 
   if (user_name && email && password && city && bio && profile_image) {
     const response = await fetch('/api/users/signup', {
       method: 'POST',
-      body: JSON.stringify({ user_name, email, password, city, bio, profile_image}),
+      body: JSON.stringify({ user_name, email, password, city, bio, profile_image }),
       headers: { 'Content-Type': 'application/json' },
     });
 
